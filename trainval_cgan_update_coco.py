@@ -324,9 +324,9 @@ if __name__ == '__main__':
   fasterRCNN.create_architecture()
 
   cgan_b_to_a= get_cgan_model()
-  device_1 = torch.device('cuda:{}'.format(1))
+  #device_1 = torch.device('cuda:{}'.format(1))
 
-  cgan_b_to_a.load_state_dict(torch.load(f'{args.checkpoints_dir}/{args.name}/latest_net_G_B.pth', map_location=str(device_1)))
+  cgan_b_to_a.load_state_dict(torch.load(f'{args.checkpoints_dir}/{args.name}/latest_net_G_B.pth', map_location=str('cuda:0')))
 
   # print(compare_models(cgan_a_to_b, cgan_b_to_a))
   for p in cgan_b_to_a.parameters(): p.requires_grad = False
@@ -370,7 +370,7 @@ if __name__ == '__main__':
   elif args.optimizer == "sgd":
     optimizer = torch.optim.SGD(params, momentum=cfg.TRAIN.MOMENTUM)
 
-  checkpoint_1 = torch.load('/raid/intern_chaitanya/exps/frcnn-1.0/faster-rcnn.pytorch-coco/models/res101_coco_2/coco/faster_rcnn_1_15_19903.pth')
+  checkpoint_1 = torch.load('./models/res101_coco/faster_rcnn_1_15_19903.pth')
   checkpoint_2 = torch.load('./models/res101_thermal/pascal_voc/faster_rcnn_1_15_1963.pth')
 
   checkpoint_1_model = OrderedDict([(k.replace('RCNN_base', 'RCNN_base_2'), v) for k, v in checkpoint_1['model'].items()  if 'RCNN_base' in k ])
