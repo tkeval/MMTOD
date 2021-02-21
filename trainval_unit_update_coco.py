@@ -363,7 +363,7 @@ if __name__ == '__main__':
   elif args.optimizer == "sgd":
     optimizer = torch.optim.SGD(params, momentum=cfg.TRAIN.MOMENTUM)
 
-  checkpoint_1 = torch.load('./models/res101_coco/coco/faster_rcnn_1_15_19903.pth')
+  checkpoint_1 = torch.load('./models/res101_coco/faster_rcnn_1_15_19903.pth')
   checkpoint_2 = torch.load('./models/res101_thermal/pascal_voc/faster_rcnn_1_15_1963.pth')
 
   checkpoint_1_model = OrderedDict([(k.replace('RCNN_base', 'RCNN_base_2'), v) for k, v in checkpoint_1['model'].items()  if 'RCNN_base' in k ])
